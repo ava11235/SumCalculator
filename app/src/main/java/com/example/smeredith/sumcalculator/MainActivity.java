@@ -20,6 +20,8 @@ public class MainActivity extends Activity  {
     //define the shared pref object
     private SharedPreferences savedValues;
 
+
+
     //define variables to be saved
     private int num1 = 0;
     private int num2 = 0;
@@ -51,6 +53,28 @@ public class MainActivity extends Activity  {
 
 
     } */
+
+    @Override
+    public void onPause(){
+
+        //save the instance variablea
+        SharedPreferences.Editor editor = savedValues.edit();
+        editor.putInt("num1", num1);
+        editor.putInt("num2", num2);
+        editor.commit();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume(){
+
+        //get the instance vars
+
+        super.onResume();
+        num1 = savedValues.getInt("num1", 0 );
+        num2 = savedValues.getInt("num2", 0);
+
+    }
 
     public void sendMessage(View view){
         //set an intent that you are going to invoke the second activity from the first activity
